@@ -1,16 +1,7 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
-function Clear_harpoon_marks()
-  local harpoon = require('harpoon')
-  local marks = harpoon.list(self, name?) 
-  for mark in pairs(marks) do
-    require('harpoon.mark').clear_mark(mark)
-  end
-end
-vim.keymap.set('n', '<leader>hc', ':lua Clear_harpoon_marks()<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+--' my fav keymaps
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open netrw' })
+
+-- some fav plugins
 return {
   {
     'ThePrimeagen/harpoon',
@@ -60,6 +51,9 @@ return {
       vim.keymap.set('n', '<C-s>', function()
         harpoon:list():select(4)
       end)
+      vim.keymap.set('n', '<leader>hc', function()
+        harpoon:list():clear()
+      end, { desc = '[H]arpoon [C]lear' })
 
       -- Toggle previous & next buffers stored within Harpoon list
       vim.keymap.set('n', '<C-S-P>', function()
@@ -72,8 +66,25 @@ return {
   },
   {
     'mbbill/undotree',
-    config = function()
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-    end,
+    vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle),
+  },
+  {
+    'folke/trouble.nvim',
+    opts = {},
+    vim.keymap.set('n', '<leader>xx', function()
+      require('trouble').toggle()
+    end),
+    vim.keymap.set('n', '<leader>xw', function()
+      require('trouble').toggle 'workspace_diagnostics'
+    end),
+    vim.keymap.set('n', '<leader>xd', function()
+      require('trouble').toggle 'document_diagnostics'
+    end),
+    vim.keymap.set('n', '<leader>xq', function()
+      require('trouble').toggle 'quickfix'
+    end),
+    vim.keymap.set('n', '<leader>xl', function()
+      require('trouble').toggle 'loclist'
+    end),
   },
 }
