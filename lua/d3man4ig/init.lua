@@ -3,6 +3,7 @@ vim.keymap.set('n', '<leader>zz', vim.cmd.ZenMode, { desc = 'Start ZenMode' })
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
 vim.keymap.set('n', '<leader>ll', function()
+  -- vim.cmd '%!eslint_d --stdin --fix-to-stdout --stdin-filename %<CR>'
   vim.cmd '%!eslint_d --stdin --fix-to-stdout'
   vim.cmd 'w'
 end)
