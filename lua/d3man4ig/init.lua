@@ -8,5 +8,7 @@ vim.keymap.set('n', '<leader>ll', function()
   vim.cmd 'w'
 end)
 
+print(vim.g.have_nerd_font)
+
 vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
