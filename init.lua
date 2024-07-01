@@ -530,6 +530,8 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { 'prettier' },
+        json = { 'prettier' },
+        jsonc = { 'prettier' },
         scss = { 'prettier' },
         typescript = { 'prettier' },
         typescriptreact = { 'prettier' },
@@ -660,7 +662,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'markdown_inline', 'typescript', 'tsx', 'c_sharp' },
+      ensure_installed = { 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'markdown_inline', 'typescript', 'tsx', 'c_sharp' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
