@@ -6,12 +6,13 @@ return {
     require('typescript-tools').setup {
       settings = {
         tsserver_file_preferences = {
-          includeInlayParameterNameHints = 'all',
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
           includeInlayFunctionParameterTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
           includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
         },
       },
     }

@@ -465,7 +465,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -478,7 +478,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'eslint',
       })
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -490,6 +492,22 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+
+            require('lspconfig').eslint.setup {
+              filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
+              settings = {
+                format = {
+                  enable = true,
+                },
+              },
+              -- Enable formatting on save
+              -- on_attach = function(client, bufnr)
+              --   vim.api.nvim_create_autocmd('BufWritePre', {
+              --     buffer = bufnr,
+              --     command = 'EslintFixAll',
+              --   })
+              -- end,
+            }
           end,
         },
       }
@@ -670,8 +688,17 @@ require('lazy').setup({
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
       },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = 'gnn', -- set to `false` to disable one of the mappings
+          node_incremental = 'grn',
+          scope_incremental = 'grc',
+          node_decremental = 'grm',
+        },
+      },
       indent = { enable = true, disable = { 'ruby' } },
-      autotag = { enable = true },
+      -- autotag = { enable = true },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
