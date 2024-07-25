@@ -114,17 +114,19 @@ return {
       },
       sections = {
         lualine_a = {
-          { 'branch', icon = { '', align = 'left' } },
-        },
-        lualine_b = {
           {
-            'filename',
             symbols = { modified = ' ', readonly = ' ', unnamed = 'No name', newfile = 'New file' },
+            'filename',
           },
         },
-        lualine_c = {},
-        lualine_x = {
+        lualine_b = {
+          { 'branch', icon = { '', align = 'left' } },
+        },
+        lualine_c = {
           { 'diff', symbols = { added = '+', modified = '~', removed = '-' } },
+        },
+        lualine_x = {
+          'location',
         },
         lualine_y = {
           'progress',
