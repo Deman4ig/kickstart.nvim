@@ -48,13 +48,13 @@ vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
   end,
 })
 
-local lint_progress = function()
-  local linters = require('lint').get_running()
-  if #linters == 0 then
-    return ''
-  end
-  return ' ' .. table.concat(linters, ', ')
-end
+-- local lint_progress = function()
+--   local linters = require('lint').get_running()
+--   if #linters == 0 then
+--     return ''
+--   end
+--   return ' ' .. table.concat(linters, ', ')
+-- end
 
 return {
   'nvim-lualine/lualine.nvim',
@@ -114,15 +114,15 @@ return {
       },
       sections = {
         lualine_a = {
+          { 'branch', icon = { '', align = 'left' } },
+        },
+        lualine_b = {
           {
             'filename',
             symbols = { modified = ' ', readonly = ' ', unnamed = 'No name', newfile = 'New file' },
           },
         },
-        lualine_b = {
-          { 'branch', icon = { ' ', align = 'right' } },
-        },
-        lualine_c = { lint_progress },
+        lualine_c = {},
         lualine_x = {
           { 'diff', symbols = { added = '+', modified = '~', removed = '-' } },
         },
