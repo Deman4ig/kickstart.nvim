@@ -1,11 +1,17 @@
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open netrw' })
-vim.keymap.set('n', '<leader>zz', vim.cmd.ZenMode, { desc = 'Start ZenMode' })
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+vim.keymap.set('i', '<C-c>', '<Esc>')
 
-vim.keymap.set('n', '<leader>lef', vim.lsp.buf.format, { noremap = true, silent = true, desc = 'Format with ESLint' })
+-- lsp keymaps
+vim.keymap.set('n', '<leader>lef', function()
+  vim.notify 'Runnin ESLint fix'
+  vim.lsp.buf.format()
+  vim.cmd 'write'
+end, { noremap = true, silent = true })
+
 vim.keymap.set('n', '<leader>lth', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, {})
 
-vim.keymap.set('i', '<C-c>', '<Esc>')
+-- yank/paste to/from system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+vim.keymap.set({ 'n', 'v' }, '<leader>p', [["+p]])

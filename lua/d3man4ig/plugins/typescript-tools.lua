@@ -1,3 +1,13 @@
+vim.api.nvim_create_autocmd('LspAttach', {
+  pattern = { '*.ts', '*.tsx', '*.js', '*.jsx' },
+  callback = function()
+    vim.keymap.set('n', '<leader>lai', function()
+      vim.notify 'Adding missing imports...'
+      vim.cmd 'TSToolsAddMissingImports'
+    end, { desc = 'Add missing imports' })
+  end,
+})
+
 return {
   'pmizio/typescript-tools.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },

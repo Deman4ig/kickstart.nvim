@@ -330,7 +330,21 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      -- {
+      --   'j-hui/fidget.nvim',
+      --   opts = {},
+      --   config = function()
+      --     require('fidget').setup {
+      --       notification = {
+      --         override_vim_notify = true,
+      --         window = {
+      --           x_padding = 0,
+      --           y_padding = 0,
+      --         },
+      --       },
+      --     }
+      --   end,
+      -- },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
@@ -664,6 +678,7 @@ require('lazy').setup({
   {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    lazy = false,
     init = function()
       vim.cmd.colorscheme 'tokyonight-night'
 
