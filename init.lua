@@ -260,6 +260,11 @@ require('lazy').setup({
         defaults = {
           layout_strategy = 'vertical',
           layout_config = { height = 0.95 },
+          path_display = {
+            shorten = 2,
+            truncate = 3,
+            tail = true,
+          },
         },
 
         -- You can put your default mappings / updates / etc. in here
@@ -269,7 +274,37 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          lsp_references = {
+            -- path_display = {
+            --   truncate = 3,
+            -- },
+            path_display = function(_, path)
+              local utils = require 'telescope.utils'
+              local sep = package.config:sub(1, 1) -- Path separator for the system
+
+              -- Define the prefix you want to remove
+              local prefix_to_remove = '/home/dfomin/projects/cc-ui'
+
+              -- Remove the prefix from the path, if present
+              if path:sub(1, #prefix_to_remove) == prefix_to_remove then
+                path = path:sub(#prefix_to_remove + 2) -- +2 to remove the slash after the prefix
+              end
+
+              -- Get the file name (last part of the path)
+              local file_name = utils.path_tail(path)
+
+              -- Get the full path excluding the file name
+              local split_path = vim.split(path, sep)
+              local path_without_file = table.concat(vim.list_slice(split_path, 1, #split_path - 1), sep)
+
+              -- Return the formatted result: "file-name - path"
+              return string.format('%s -- %s', file_name, path_without_file)
+            end,
+            show_line = false,
+            sorting_strategy = 'ascending',
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
