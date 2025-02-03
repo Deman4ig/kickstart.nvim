@@ -261,9 +261,9 @@ require('lazy').setup({
           layout_strategy = 'vertical',
           layout_config = { height = 0.95 },
           path_display = {
-            shorten = 2,
+            shorten = 5,
             truncate = 3,
-            tail = true,
+            -- tail = true,
           },
         },
 
@@ -710,17 +710,17 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    lazy = false,
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   lazy = false,
+  --   init = function()
+  --     vim.cmd.colorscheme 'tokyonight-night'
+  --
+  --     -- You can configure highlights by doing something like:
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
